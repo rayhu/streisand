@@ -14,13 +14,10 @@ shadowsocks_dependencies:
   - libmbedtls-dev
   - libpcre3-dev
   - libsodium-dev
-  - libudns-dev
+  - libc-ares-dev
   # Shadowsocks may complain about lack of entropy without rng-tools installed
   - rng-tools
   - libssl-dev
-
-shadowsocks_version: "3.0.7"
-shadowsocks_compilation_directory: "/usr/local/src/shadowsocks-libev-{{ shadowsocks_version }}"
 
 # Configuring the build without documentation means we save close to 900mb of deps
 # with the tradeoff of not creating man pages
@@ -30,8 +27,8 @@ shadowsocks_location: "/etc/shadowsocks-libev"
 shadowsocks_password_file: "{{ shadowsocks_location }}/shadowsocks-password.txt"
 
 # simple-obfs vars
-simple_obfs_version: "0.0.3"
-simple_obfs_compilation_directory: "/usr/local/src/shadowsocks-libev-{{ simple_obfs_version }}"
+simple_obfs_version: "0.0.5"
+simple_obfs_compilation_directory: "/usr/local/src/shadowsocks-simple-obfs-{{ simple_obfs_version }}"
 simple_obfs_configure_flags: "--disable-documentation"
 
 # Add -v for verbose mode to help with debugging
@@ -40,3 +37,5 @@ shadowsocks_daemon_args: "-u"
 shadowsocks_gateway_location: "{{ streisand_gateway_location }}/shadowsocks"
 
 shadowsocks_qr_code: "{{ shadowsocks_gateway_location }}/shadowsocks-qr-code.png"
+
+shadowsocks_systemd_service_path: "/etc/systemd/system/shadowsocks-libev.service.d"
